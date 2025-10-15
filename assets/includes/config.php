@@ -8,17 +8,29 @@ if (!defined('APP_ROOT')) {
     define('APP_ROOT', dirname(__DIR__, 2));
 }
 
-if (!defined('DB_DIR')) {
-    define('DB_DIR', APP_ROOT . '/database');
+// MySQL configuration (override via environment variables)
+if (!defined('DB_HOST')) {
+    define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
 }
-
-if (!defined('DB_FILE')) {
-    define('DB_FILE', DB_DIR . '/fas.db');
+if (!defined('DB_PORT')) {
+    define('DB_PORT', getenv('DB_PORT') ?: '3306');
+}
+if (!defined('DB_NAME')) {
+    define('DB_NAME', getenv('DB_NAME') ?: 'fas');
+}
+if (!defined('DB_USER')) {
+    define('DB_USER', getenv('DB_USER') ?: 'root');
+}
+if (!defined('DB_PASS')) {
+    define('DB_PASS', getenv('DB_PASS') ?: '');
+}
+if (!defined('DB_CHARSET')) {
+    define('DB_CHARSET', getenv('DB_CHARSET') ?: 'utf8mb4');
 }
 
 /**
- * Get a shared PDO connection to the SQLite database.
- * Ensures the database directory and base schema exist.
+ * Get a shared PDO connection to the MySQL database.
+ * Ensures the database and base schema exist.
  */
 function getDatabaseConnection(): PDO {
     static $pdo = null;
@@ -26,24 +38,51 @@ function getDatabaseConnection(): PDO {
         return $pdo;
     }
 
-    if (!is_dir(DB_DIR)) {
-        // Create folder if not exists
-        mkdir(DB_DIR, 0777, true);
+    $commonOptions = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ];
+
+    // First, ensure the database exists (connect without a specific DB)
+    $serverDsn = sprintf(
+        'mysql:host=%s;port=%s;charset=%s',
+        DB_HOST,
+        DB_PORT,
+        DB_CHARSET
+    );
+    try {
+        $serverPdo = new PDO($serverDsn, DB_USER, DB_PASS, $commonOptions);
+        // Attempt to create the database if it doesn't exist
+        $serverPdo->exec(sprintf(
+            'CREATE DATABASE IF NOT EXISTS `%s` DEFAULT CHARACTER SET %s COLLATE %s',
+            str_replace('`', '``', DB_NAME),
+            DB_CHARSET,
+            DB_CHARSET . '_unicode_ci'
+        ));
+    } catch (Throwable $ignored) {
+        // Ignore inability to create DB; connection below may still succeed if DB exists
     }
 
-    $pdo = new PDO('sqlite:' . DB_FILE);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    // Now connect to the specific database
+    $databaseDsn = sprintf(
+        'mysql:host=%s;port=%s;dbname=%s;charset=%s',
+        DB_HOST,
+        DB_PORT,
+        DB_NAME,
+        DB_CHARSET
+    );
+    $pdo = new PDO($databaseDsn, DB_USER, DB_PASS, $commonOptions);
 
     // Ensure base schema exists
     $pdo->exec(
         'CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL,
-            email TEXT NOT NULL UNIQUE,
-            password TEXT NOT NULL,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP
-        )'
+            id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            username VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL,
+            created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=' . DB_CHARSET . ' COLLATE=' . DB_CHARSET . '_unicode_ci'
     );
 
     return $pdo;

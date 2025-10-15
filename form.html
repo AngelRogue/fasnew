@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login/Register Toggle</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .form-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    form {
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <!-- Toggle Button -->
+  <button id="toggle-btn" class="btn btn-secondary toggle-btn">Switch to Register</button>
+
+  <!-- Sign In Form -->
+  <form id="login-form">
+    <h3 class="mb-3 text-center">Sign In</h3>
+    <div class="mb-3">
+      <input type="email" class="form-control" placeholder="Email" required>
+    </div>
+    <div class="mb-3">
+      <input type="password" class="form-control" placeholder="Password" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Sign In</button>
+  </form>
+
+  <!-- Register Form -->
+  <form id="register-form" class="d-none">
+    <h3 class="mb-3 text-center">Register</h3>
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Username" required>
+    </div>
+    <div class="mb-3">
+      <input type="email" class="form-control" placeholder="Email" required>
+    </div>
+    <div class="mb-3">
+      <input type="password" class="form-control" placeholder="Password" required>
+    </div>
+    <button type="submit" class="btn btn-success w-100">Register</button>
+  </form>
+</div>
+
+<script>
+  const toggleBtn = document.getElementById('toggle-btn');
+  const loginForm = document.getElementById('login-form');
+  const registerForm = document.getElementById('register-form');
+  let showingLogin = true;
+
+  toggleBtn.addEventListener('click', () => {
+    if (showingLogin) {
+      // Show Register, hide Login
+      loginForm.classList.add('d-none');
+      registerForm.classList.remove('d-none');
+      toggleBtn.textContent = 'Switch to Sign In';
+      toggleBtn.classList.replace('btn-secondary', 'btn-primary');
+    } else {
+      // Show Login, hide Register
+      registerForm.classList.add('d-none');
+      loginForm.classList.remove('d-none');
+      toggleBtn.textContent = 'Switch to Register';
+      toggleBtn.classList.replace('btn-primary', 'btn-secondary');
+    }
+    showingLogin = !showingLogin;
+  });
+</script>
+
+</body>
+</html>

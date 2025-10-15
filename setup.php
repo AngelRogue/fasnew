@@ -1,17 +1,11 @@
 <?php
+declare(strict_types=1);
+require_once __DIR__ . '/assets/includes/config.php';
+
 try {
-  $db = new PDO('sqlite:fas.db');
-  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  $db->exec("CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL
-  )");
-
-  echo "✅ Database and table created successfully.";
-} catch (PDOException $e) {
-  echo "Error: " . $e->getMessage();
+  $db = getDatabaseConnection();
+  echo "✅ Database and table ensured at " . h(DB_FILE) . ".";
+} catch (Throwable $e) {
+  echo "Error: " . h($e->getMessage());
 }
 ?>

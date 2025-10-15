@@ -1,28 +1,42 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $email = $_POST['email'] ?? '';
-  $password = $_POST['password'] ?? '';
+declare(strict_types=1);
 
-  if (empty($email) || empty($password)) {
-    echo "❌ Please fill all fields.";
-    exit;
-  }
+require_once __DIR__ . '/assets/includes/config.php';
+require_once __DIR__ . '/assets/includes/session.php';
 
-  try {
-    $db = new PDO('sqlite:database/fas.db');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    redirect('index.php');
+}
 
-    $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+$email = trim($_POST['email'] ?? '');
+$password = (string)($_POST['password'] ?? '');
+
+if ($email === '' || $password === '') {
+    setFlash('auth', 'Please fill in both email and password.', 'danger');
+    redirect('index.php');
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    setFlash('auth', 'Please enter a valid email address.', 'danger');
+    redirect('index.php');
+}
+
+try {
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('SELECT id, username, email, password FROM users WHERE email = :email LIMIT 1');
+    $stmt->execute([':email' => $email]);
+    $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
-      echo "✅ Login successful! Welcome, " . htmlspecialchars($user['username']);
-    } else {
-      echo "❌ Invalid email or password.";
+        loginUser($user);
+        setFlash('auth', 'Welcome back, ' . h($user['username']) . '!', 'success');
+        redirect('dashboard.php');
     }
-  } catch (PDOException $e) {
-    echo "❌ Error: " . $e->getMessage();
-  }
+
+    setFlash('auth', 'Invalid email or password.', 'danger');
+    redirect('index.php');
+} catch (Throwable $e) {
+    setFlash('auth', 'Unexpected error during login.', 'danger');
+    redirect('index.php');
 }
 ?>

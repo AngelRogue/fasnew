@@ -1,3 +1,15 @@
+<?php
+require_once __DIR__ . '/assets/includes/config.php';
+require_once __DIR__ . '/assets/includes/session.php';
+
+$authFlash = getFlash('auth');
+$registerFlash = getFlash('register');
+$showRegister = $registerFlash !== null; // if registration error/success, show register form
+
+if (currentUser()) {
+  redirect('dashboard.php');
+}
+?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 
@@ -62,31 +74,43 @@
 
       <div class="col-md-10 mx-auto col-lg-5">
 
+        <?php if ($authFlash): ?>
+          <div class="alert alert-<?= h($authFlash['type'] ?? 'info') ?>" role="alert">
+            <?= h($authFlash['message'] ?? '') ?>
+          </div>
+        <?php endif; ?>
+
+        <?php if ($registerFlash): ?>
+          <div class="alert alert-<?= h($registerFlash['type'] ?? 'info') ?>" role="alert">
+            <?= h($registerFlash['message'] ?? '') ?>
+          </div>
+        <?php endif; ?>
+
         <!-- Sign In Form -->
-        <form id="login-form" method="POST" action="login.php">
+        <form id="login-form" method="POST" action="login.php" class="<?= $showRegister ? 'd-none' : '' ?>">
 
           <h3 class="mb-3 text-center">Sign In</h3>
           <div class="mb-3">
-            <input type="email" class="form-control" placeholder="Email" required>
+            <input type="email" name="email" class="form-control" placeholder="Email" required>
           </div>
           <div class="mb-3">
-            <input type="password" class="form-control" placeholder="Password" required>
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
           </div>
           <button type="submit" class="btn btn-primary w-100">Sign In</button>
         </form>
 
         <!-- Register Form -->
-        <form id="register-form" class="d-none" method="POST" action="register.php">
+        <form id="register-form" class="<?= $showRegister ? '' : 'd-none' ?>" method="POST" action="register.php">
 
           <h3 class="mb-3 text-center">Register</h3>
           <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Username" required>
+            <input type="text" name="username" class="form-control" placeholder="Username" required>
           </div>
           <div class="mb-3">
-            <input type="email" class="form-control" placeholder="Email" required>
+            <input type="email" name="email" class="form-control" placeholder="Email" required>
           </div>
           <div class="mb-3">
-            <input type="password" class="form-control" placeholder="Password" required>
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
           </div>
           <button type="submit" class="btn btn-success w-100">Register</button>
         </form>
@@ -94,7 +118,7 @@
         <!-- Toggle Link -->
         <div class="text-center mt-3">
           <button id="toggle-forms" class="btn btn-link">
-            Don't have an account? Register
+            <?= $showRegister ? 'Already have an account? Sign In' : "Don't have an account? Register" ?>
           </button>
         </div>
 
@@ -110,7 +134,7 @@
   const toggleBtn = document.getElementById('toggle-forms');
   const loginForm = document.getElementById('login-form');
   const registerForm = document.getElementById('register-form');
-  let showingLogin = true;
+  let showingLogin = <?= $showRegister ? 'false' : 'true' ?>;
 
   toggleBtn.addEventListener('click', () => {
     if (showingLogin) {

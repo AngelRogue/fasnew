@@ -13,7 +13,7 @@
 
 <!-- ✅ App Scripts -->
 <script src="./assets/js/sidebarmenu.js"></script>
-<script src="./assets/js/app.min.js"></script>
+<script src="./assets/js/main.js"></script>
 <script src="./assets/js/dashboard.js"></script>
 
 <!-- ✅ Iconify (for Solar Icons) -->

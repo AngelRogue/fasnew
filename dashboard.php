@@ -14,8 +14,7 @@ $user = currentUser();
   <title>Dashboard - NiceAdmin Bootstrap Template</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-<style>
-  
+  <style>
     .info-card {
       border: none;
       border-radius: 20px;
@@ -49,12 +48,30 @@ $user = currentUser();
     }
 
     /* === Color themes === */
-    .card-1 { background: linear-gradient(135deg, #007bff, #00b4ff); }
-    .card-2 { background: linear-gradient(135deg, #28a745, #63e6be); }
-    .card-5 { background: linear-gradient(135deg, #ffc107, #ffda6a); color: #333; }
-    .card-4 { background: linear-gradient(135deg, #e83e8c, #ff77c2); }
-    .card-3 { background: linear-gradient(135deg, #6610f2, #a070ff); }
-    .card-6 { background: linear-gradient(135deg, #fd7e14, #ffb067); }
+    .card-1 {
+      background: linear-gradient(135deg, #007bff, #00b4ff);
+    }
+
+    .card-2 {
+      background: linear-gradient(135deg, #28a745, #63e6be);
+    }
+
+    .card-5 {
+      background: linear-gradient(135deg, #ffc107, #ffda6a);
+      color: #333;
+    }
+
+    .card-4 {
+      background: linear-gradient(135deg, #e83e8c, #ff77c2);
+    }
+
+    .card-3 {
+      background: linear-gradient(135deg, #6610f2, #a070ff);
+    }
+
+    .card-6 {
+      background: linear-gradient(135deg, #fd7e14, #ffb067);
+    }
 
     /* Clickable cards */
     .card-link {
@@ -66,9 +83,12 @@ $user = currentUser();
       text-decoration: none;
       color: inherit;
     }
-    #allcard{display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;}
+
+    #allcard {
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: row;
+    }
   </style>
   <?php include 'assets/includes/css-link.php'; ?>
 </head>
@@ -96,43 +116,43 @@ $user = currentUser();
 
         <!-- Left side columns -->
         <div class="col-lg-8">
-         <div class="row g-4 justify-content-center" id="allcard">
-        <!-- Card 1 -->
-        <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
-          <a href="/lecture-slides.html" class="card-link w-100">
-            <div class="card info-card card-1 h-100">
-          <div class="d-flex align-items-center h-100">
-            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="bi bi-book"></i>
+          <div class="row g-4 justify-content-center" id="allcard">
+            <!-- Card 1 -->
+            <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
+              <a href="/lecture-slides.html" class="card-link w-100">
+                <div class="card info-card card-1 h-100">
+                  <div class="d-flex align-items-center h-100">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-book"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h5>Lecture Slides</h5>
+                      <p>View or download your course materials</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
-            <div class="ps-3">
-              <h5>Lecture Slides</h5>
-              <p>View or download your course materials</p>
-            </div>
-          </div>
-            </div>
-          </a>
-        </div>
 
-        <!-- Card 2 -->
-        <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
-          <a href="/assignments.html" class="card-link w-100">
-            <div class="card info-card card-2 h-100">
-          <div class="d-flex align-items-center h-100">
-            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="bi bi-newspaper"></i>
+            <!-- Card 2 -->
+            <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
+              <a href="/assignments.html" class="card-link w-100">
+                <div class="card info-card card-2 h-100">
+                  <div class="d-flex align-items-center h-100">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-newspaper"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h5>Past Papers</h5>
+                      <p>Submit and review your tasks</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
-            <div class="ps-3">
-              <h5>Past Papers</h5>
-              <p>Submit and review your tasks</p>
-            </div>
-          </div>
-            </div>
-          </a>
-        </div>
 
-        <!-- Card 3 -->
-        <!-- <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
+            <!-- Card 3 -->
+            <!-- <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
           <a href="/classmates.html" class="card-link w-100">
             <div class="card info-card card-3 h-100">
           <div class="d-flex align-items-center h-100">
@@ -148,8 +168,8 @@ $user = currentUser();
           </a>
         </div> -->
 
-        <!-- Card 4 -->
-        <!-- <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
+            <!-- Card 4 -->
+            <!-- <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
           <a href="/schedule.html" class="card-link w-100">
             <div class="card info-card card-4 h-100">
           <div class="d-flex align-items-center h-100">
@@ -165,41 +185,41 @@ $user = currentUser();
           </a>
         </div> -->
 
-        <!-- Card 5 -->
-        <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
-          <a href="/discussions.html" class="card-link w-100">
-            <div class="card info-card card-5 h-100">
-          <div class="d-flex align-items-center h-100">
-            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="fa-regular fa-handshake"></i>
+            <!-- Card 5 -->
+            <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
+              <a href="/discussions.html" class="card-link w-100">
+                <div class="card info-card card-5 h-100">
+                  <div class="d-flex align-items-center h-100">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="fa-regular fa-handshake"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h5>Contribute</h5>
+                      <p>Participate in course forums</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
-            <div class="ps-3">
-              <h5>Contribute</h5>
-              <p>Participate in course forums</p>
-            </div>
-          </div>
-            </div>
-          </a>
-        </div>
 
-        <!-- Card 6 -->
-        <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
-          <a href="/progress.html" class="card-link w-100">
-            <div class="card info-card card-6 h-100">
-          <div class="d-flex align-items-center h-100">
-            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="bi bi-telegram"></i>
+            <!-- Card 6 -->
+            <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
+              <a href="/progress.html" class="card-link w-100">
+                <div class="card info-card card-6 h-100">
+                  <div class="d-flex align-items-center h-100">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-telegram"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h5>Request Module</h5>
+                      <p>Track your performance</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
-            <div class="ps-3">
-              <h5>Request Module</h5>
-              <p>Track your performance</p>
-            </div>
-          </div>
-            </div>
-          </a>
-        </div>
 
-    </div><!-- End inner row -->
+          </div><!-- End inner row -->
 
         </div><!-- End Left side columns -->
 
@@ -208,20 +228,7 @@ $user = currentUser();
 
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  <!-- <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-       All the links in the footer should remain intact. -->
-  <!-- You can delete the links only if you purchased the pro version. -->
-  <!-- Licensing information: https://bootstrapmade.com/license/ -->
-  <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
-  </footer> -->
-  <!-- End Footer -->
+
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

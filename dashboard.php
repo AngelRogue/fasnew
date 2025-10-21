@@ -84,11 +84,11 @@ $user = currentUser();
       color: inherit;
     }
 
-    #allcard {
+    /* #allcard {
       display: flex;
       flex-wrap: nowrap;
       flex-direction: row;
-    }
+    } */
   </style>
   <?php include 'assets/includes/css-link.php'; ?>
 </head>
@@ -117,7 +117,7 @@ $user = currentUser();
         <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row g-4 justify-content-center" id="allcard">
-            <!-- Card 1 -->
+            <!-- Card 1 -->            
             <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
               <a href="/lecture-slides.html" class="card-link w-100">
                 <div class="card info-card card-1 h-100">
@@ -150,40 +150,6 @@ $user = currentUser();
                 </div>
               </a>
             </div>
-
-            <!-- Card 3 -->
-            <!-- <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
-          <a href="/classmates.html" class="card-link w-100">
-            <div class="card info-card card-3 h-100">
-          <div class="d-flex align-items-center h-100">
-            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="bi bi-people"></i>
-            </div>
-            <div class="ps-3">
-              <h5>Classmates</h5>
-              <p>Connect and collaborate</p>
-            </div>
-          </div>
-            </div>
-          </a>
-        </div> -->
-
-            <!-- Card 4 -->
-            <!-- <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
-          <a href="/schedule.html" class="card-link w-100">
-            <div class="card info-card card-4 h-100">
-          <div class="d-flex align-items-center h-100">
-            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="bi bi-calendar-event"></i>
-            </div>
-            <div class="ps-3">
-              <h5>Schedule</h5>
-              <p>Check your upcoming classes and exams</p>
-            </div>
-          </div>
-            </div>
-          </a>
-        </div> -->
 
             <!-- Card 5 -->
             <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">

@@ -100,24 +100,21 @@ $user = currentUser();
   <!-- End Sidebar-->
   <?php include 'assets/includes/dash-sidebar.php'; ?>
   <main id="main" class="main">
-
     <div class="pagetitle">
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="/dashboard.php">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
-
     <section class="section dashboard">
       <div class="row d-flex flex-nowrap flex-row justify-content-center">
-
         <!-- Left side columns -->
         <div class="col-lg-8">
           <div class="row g-4 justify-content-center" id="allcard">
-            <!-- Card 1 -->            
+            <!-- Card 1 -->
             <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
               <a href="lecture-slides.php" class="card-link w-100">
                 <div class="card info-card card-1 h-100">
@@ -184,18 +181,11 @@ $user = currentUser();
                 </div>
               </a>
             </div>
-
           </div><!-- End inner row -->
-
         </div><!-- End Left side columns -->
-
       </div><!-- End main row -->
     </section>
-
   </main><!-- End #main -->
-
-
-
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <?php include 'assets/includes/js-link.php'; ?>

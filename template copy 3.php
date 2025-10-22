@@ -119,7 +119,7 @@ $user = currentUser();
           <div class="row g-4 justify-content-center" id="allcard">
             <!-- Card 1 -->            
             <div class="col-xxl-4 col-md-6 d-flex align-items-stretch">
-              <a href="lecture-slides.php" class="card-link w-100">
+              <a href="/lecture-slides.html" class="card-link w-100">
                 <div class="card info-card card-1 h-100">
                   <div class="d-flex align-items-center h-100">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
